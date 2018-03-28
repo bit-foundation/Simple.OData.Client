@@ -126,12 +126,10 @@ namespace Simple.OData.Client
             try
             {
                 Assembly assembly = null;
-#if PORTABLE
+
                 var assemblyName = new AssemblyName(adapterAssemblyName);
                 assembly = Assembly.Load(assemblyName);
-#else
-                assembly = this.GetType().Assembly;
-#endif
+
                 var constructors = assembly.GetType(adapterTypeName).GetDeclaredConstructors();
                 var ctor = constructors.Single(x => 
                     x.GetParameters().Count() == ctorParams.Count() &&
